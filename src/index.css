@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   AFRICHINA LOGISTICS — système de design « bleu & blanc »
+   Blanc dominant, bleu cobalt pour l'action, encre bleue pour le texte.
+   ========================================================================== */
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Manrope", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-cobalt-50: #eef3ff;
+  --color-cobalt-100: #dce6ff;
+  --color-cobalt-200: #bccdff;
+  --color-cobalt-300: #8eabff;
+  --color-cobalt-400: #5c84fa;
+  --color-cobalt-500: #1747e6;
+  --color-cobalt-600: #1239c4;
+  --color-cobalt-700: #0f2e9e;
+  --color-cobalt-800: #0e2577;
+  --color-cobalt-900: #0a1b4d;
+  --color-cobalt-950: #06102f;
+
+  --color-ink: #0a1b4d;
+  --color-muted: #5a6a92;
+  --color-line: #e3e9f6;
+  --color-paper: #ffffff;
+
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-dash: dash 1.6s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-slide-in: slide-in 0.3s ease-out;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: -24; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes slide-in {
+    from { transform: translateX(24px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+  ::selection {
+    @apply bg-cobalt-500 text-white;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-cobalt-500;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply w-full px-4 sm:px-6 lg:px-10 2xl:px-16;
+  }
+
+  /* Petit libellé monospace avec carré bleu : signature visuelle du site */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-cobalt-500;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block size-1.5 bg-current;
+  }
+  .eyebrow-light {
+    @apply text-cobalt-200;
+  }
+
+  .section-title {
+    @apply font-display text-[2rem] leading-[1.1] font-bold text-ink sm:text-[2.6rem];
+  }
+  .section-lead {
+    @apply text-base leading-relaxed text-muted sm:text-lg;
+  }
+
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-[10px] px-6 text-[15px] font-semibold whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-sm {
+    @apply h-10 px-4 text-sm;
+  }
+  .btn-primary {
+    @apply bg-cobalt-500 text-white shadow-[0_8px_24px_-10px_rgba(23,71,230,0.7)] hover:bg-cobalt-600 active:translate-y-px;
+  }
+  .btn-outline {
+    @apply border border-cobalt-200 bg-white text-cobalt-600 hover:border-cobalt-500 hover:bg-cobalt-50;
+  }
+  .btn-white {
+    @apply bg-white text-cobalt-600 hover:bg-cobalt-50;
+  }
+  .btn-ghost-white {
+    @apply border border-white/35 text-white hover:border-white hover:bg-white/10;
+  }
+
+  .card {
+    @apply rounded-[18px] border border-line bg-white;
+  }
+
+  .input {
+    @apply h-12 w-full rounded-[10px] border border-line bg-white px-4 text-[15px] text-ink transition placeholder:text-muted/60 focus:border-cobalt-500 focus:ring-4 focus:ring-cobalt-500/10 focus:outline-none disabled:cursor-not-allowed disabled:bg-cobalt-50/60 disabled:text-muted;
+  }
+  textarea.input {
+    @apply h-auto py-3;
+  }
+  .input-error {
+    @apply border-red-400 bg-red-50/40 focus:border-red-500 focus:ring-red-500/10;
+  }
+  .label {
+    @apply mb-1.5 block text-[13px] font-semibold text-ink;
+  }
+  .field-error {
+    @apply mt-1.5 text-[13px] font-medium text-red-600;
+  }
+  .field-hint {
+    @apply mt-1.5 text-xs text-muted;
+  }
+
+  /* Quadrillage léger façon plan / bordereau */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(23, 71, 230, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(23, 71, 230, 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .nav-link {
+    @apply relative rounded-lg px-2.5 py-2 text-[15px] font-semibold whitespace-nowrap text-ink/75 transition-colors hover:text-cobalt-500 xl:px-3;
+  }
+  .nav-link.active {
+    @apply text-cobalt-500;
+  }
+  .nav-link.active::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-cobalt-500;
+  }
+
+  .prose-article h2 {
+    @apply mt-10 mb-3 font-display text-2xl font-bold text-ink;
+  }
+  .prose-article h3 {
+    @apply mt-6 mb-2 font-display text-lg font-semibold text-ink;
+  }
+  .prose-article p {
+    @apply mb-4 leading-[1.8] text-ink/80;
+  }
+  .prose-article ul {
+    @apply mb-5 list-none space-y-2 pl-0;
+  }
+  .prose-article li {
+    @apply relative pl-6 leading-relaxed text-ink/80;
+  }
+  .prose-article li::before {
+    content: "";
+    @apply absolute top-[0.65em] left-1 size-1.5 bg-cobalt-500;
+  }
+  .prose-article strong {
+    @apply font-semibold text-ink;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Révélation au défilement (voir composant Reveal) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Impression du bordereau de suivi */
+@media print {
+  [data-print-hide] {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-break-avoid {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /auth
+Disallow: /login
+Disallow: /reset-password
+
+Sitemap: https://www.africhinalogistics.com/sitemap.xml
