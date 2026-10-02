@@ -20,8 +20,8 @@ export default function AppTopBar({ badge, children }: { badge: string; children
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur-md" data-print-hide>
       <div className="flex h-16 items-center gap-3 px-4 sm:px-6 lg:px-10 2xl:px-16">
-        <Logo compact className="sm:hidden" />
-        <Logo className="hidden sm:inline-flex" />
+        <span className="sm:hidden"><Logo compact /></span>
+        <span className="hidden sm:block"><Logo /></span>
         <span className="rounded-full bg-cobalt-50 px-2.5 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-cobalt-600 uppercase">{badge}</span>
         {children}
         <div className="ml-auto flex items-center gap-2">
