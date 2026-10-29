@@ -116,7 +116,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-white/15 pt-6 text-[13px] text-cobalt-100 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {settings.company_name}. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} {settings.company_name}. Tous droits réservés. Site réalisé par <a href="https://rauval.com" target="_blank" rel="noopener" className="hover:text-white underline">Rauval</a>.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/terms-and-conditions" className="hover:text-white">Conditions générales</Link>
             <Link to="/track" className="hover:text-white">Suivi de colis</Link>
